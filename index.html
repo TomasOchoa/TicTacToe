@@ -1,10 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Tic-Tac-Toe</title>
+<!--Stylesheets-->
+	<!--Bootstrap-->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	
 </head>
 <body>
-
+		<!--Container for displaying data-->
+		<div class="container display">
+			<div class="jumbotron">
+				<div class="messages col" id="messages">Start game!</div>
+				<div class="turn" id="turn">Turn: <span>Player 1</span></div>
+			</div>
+		</div>
+		
+		<!--Container for gameboard-->
+		<!--<div class="container gameBoard">-->
+			<!--&lt;!&ndash;Row 0&ndash;&gt;-->
+			<!--<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 gameBoardRow" id="row0">-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="00" value=""></div>-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="01" value=""></div>-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="02" value=""></div>-->
+				<!--&lt;!&ndash;<input class="gameBoardBox" type="button" id="00" value="">&ndash;&gt;-->
+				<!--&lt;!&ndash;<input class="gameBoardBox" type="button" id="01" value="">&ndash;&gt;-->
+				<!--&lt;!&ndash;<input class="gameBoardBox" type="button" id="02" value="">&ndash;&gt;-->
+			<!--</div>-->
+			<!---->
+			<!--&lt;!&ndash;Row 1&ndash;&gt;-->
+			<!--<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 gameBoardRow" id="row1">-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="10" value=""></div>-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="11" value=""></div>-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="12" value=""></div>-->
+				<!--&lt;!&ndash;<input class="col-md-push-4 gameBoardBox" type="button" id="10" value="">&ndash;&gt;-->
+				<!--&lt;!&ndash;<input class="col-md-push-4 gameBoardBox" type="button" id="11" value="">&ndash;&gt;-->
+				<!--&lt;!&ndash;<input class="col-md-push-4 gameBoardBox" type="button" id="12" value="">&ndash;&gt;-->
+			<!--</div>-->
+			<!---->
+			<!--&lt;!&ndash;Row 2&ndash;&gt;-->
+			<!--<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12 gameBoardRow" id="row2">-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="20" value=""></div>-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="21" value=""></div>-->
+				<!--<div class="gameBoardBox col-xs-4 col-sm-4 col-md-4 col-lg-4" type="button" id="22" value=""></div>-->
+				<!--&lt;!&ndash;<input class="gameBoardBox" type="button" id="20" value="">&ndash;&gt;-->
+				<!--&lt;!&ndash;<input class="gameBoardBox" type="button" id="21" value="">&ndash;&gt;-->
+				<!--&lt;!&ndash;<input class="gameBoardBox" type="button" id="22" value="">&ndash;&gt;-->
+			<!--</div>-->
+		<!--</div>-->
+		<div class="table-responsive gameBoard">
+			<table class="table">
+				<tr class="row" id="row0">
+					<td class="gameBoardBox" id="00"></td>
+					<td class="gameBoardBox" id="01"></td>
+					<td class="gameBoardBox" id="02"></td>
+				</tr>
+				<tr class="row" id="row1">
+					<td class="gameBoardBox" id="10"></td>
+					<td class="gameBoardBox" id="11"></td>
+					<td class="gameBoardBox" id="12"></td>
+				</tr>
+				<tr class="row" id="row2">
+					<td class="gameBoardBox" id="20"></td>
+					<td class="gameBoardBox" id="21"></td>
+					<td class="gameBoardBox" id="22"></td>
+				</tr>
+		</table>
+		</div>
+	
+	
+	
+	
+<!--Scripts-->
+	<!--jQuery-->       <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<!--Bootstrap-->    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!--Actual app-->   <script src="assets/js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,50 @@
+html{
+    height: 100% !important;
+}
+body{
+    height: 100%;
+}
+.table>tbody>tr>td{
+    border: solid rgb(50,50,50) 20px;
+    border-radius: 25%;
+}
+.gameBoardBox{
+    /*background-color: red;*/
+    height: 15em;
+    width: 15em;
+    text-align: center;
+    background: no-repeat;
+    background-size: contain;
+}
+/*------- Styles for each box --------*/
+/*Top Boxes & Mid Boxes*/
+/*.table>tbody>tr>.topLeft,.midLeft,*/
+/*.table>tbody>tr>.midLeft{*/
+    /*border-bottom: solid black 30px;*/
+    /*border-right: solid black 30px;*/
+    /*border-radius: 30px;*/
+/*}*/
+/*.table>tbody>tr>.topCenter,.bottomCenter,*/
+/*.table>tbody>tr>.midCenter{*/
+    /*border-bottom: solid black 30px;*/
+    /*border-radius: 30px;*/
+/*}*/
+/*.table>tbody>tr>.topRight,.bottomRight,*/
+/*.table>tbody>tr>.midRight{*/
+    /*border-bottom: solid black 30px;*/
+    /*border-left: solid black 30px;*/
+    /*border-radius: 30px;*/
+/*}*/
+/*!*Bottom Boxes*!*/
+/*.table>tbody>tr>.bottomLeft{*/
+    /*border-right: solid black 30px;*/
+    /*border-radius: 30px;*/
+/*}*/
+/*.table>tbody>tr>.bottomCenter{*/
+/*}*/
+/*.table>tbody>tr>.bottomRight{*/
+    /*border-left: solid black 30px;*/
+    /*border-radius: 30px;*/
+/*}*/
+/*--------------------------*/
+
