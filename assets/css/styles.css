@@ -6,7 +6,6 @@ body{
 }
 .table>tbody>tr>td{
     border: solid rgb(50,50,50) 20px;
-    border-radius: 25%;
 }
 .gameBoardBox{
     /*background-color: red;*/
@@ -20,6 +19,20 @@ body{
     color: red;
     font-weight: bold;
     text-decoration: underline;
+}
+/* 'X' */
+.cross{
+    background-image: url("../images/cross.png");
+}
+/* 'O' */
+.circle{
+    background-image: url("../images/circle.png");
+}
+.crossWin{
+    background-image: url("../images/cross-win.png");
+}
+.circleWin{
+    background-image: url("../images/circle-win.png");
 }
 
 
