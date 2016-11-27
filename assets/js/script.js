@@ -34,14 +34,14 @@ $(function () {
         }
         //Else do move
         else{
+            var location = clickedBox[0].id;
+            ttt.verifyMove(location);
             if(ttt.playerTurn == 1){
-                ttt.verifyMove(clickedBox);
                 ttt.setBox(clickedBox,ttt.player1.piece);
                 ttt.changeTurnDisplay(2);
                 return ttt.playerTurn = 2;
             }
             if(ttt.playerTurn == 2){
-                ttt.verifyMove(clickedBox);
                 ttt.setBox(clickedBox,ttt.player2.piece);
                 ttt.changeTurnDisplay(1);
                 return ttt.playerTurn = 1;
@@ -71,8 +71,9 @@ function TicTacToe() {
     }
 
     //Methods
-    this.verifyMove = function (boxClicked) {
-        return true;
+    this.verifyMove = function (location) {
+        console.log(location);
+
     }
     this.setBox = function (boxClicked,playerPiece) {
         boxClicked.css('background-image',playerPiece);
