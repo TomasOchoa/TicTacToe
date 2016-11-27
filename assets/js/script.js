@@ -3,9 +3,6 @@
  */
 "use strict";
 
-var cross = "url('assets/images/cross.png')";      //'X'
-var circle = "url('assets/images/circle.png')";    //'O'
-
 $(function () {
     var ttt = new TicTacToe();
     ttt.changeMessageDisplay('Pick your piece!');      //Prompt for p1 piece
@@ -13,6 +10,9 @@ $(function () {
     //---------- Click Listeners ----------
     //Button Listener
     $('button').click(function () {
+        var cross = "url('assets/images/cross.png')";      //'X' image
+        var circle = "url('assets/images/circle.png')";    //'O' image
+
         if($(this).html() == 'X'){
             ttt.player1.piece = cross;
             ttt.player2.piece = circle;
@@ -21,24 +21,36 @@ $(function () {
             ttt.player1.piece = circle;
             ttt.player2.piece = cross;
         }
+        ttt.displayMessage.removeClass('error');
         ttt.changeMessageDisplay('Make your move!')
         $('button').hide();
     });
     //Box Listener
     $('td').click(function () {
         var clickedBox = $(this);
-        if(ttt.playerTurn == 1){
-            clickedBox.css('background-image',ttt.player1.piece);
-            ttt.changeTurnDisplay(2);
-            return ttt.playerTurn = 2;
+        //If pieces !set yet, show error
+        if(ttt.player1.piece === ''){
+            ttt.displayMessage.addClass('error');
         }
-        if(ttt.playerTurn == 2){
-            clickedBox.css('background-image',ttt.player2.piece);
-            ttt.changeTurnDisplay(1);
-            return ttt.playerTurn = 1;
+        //Else do move
+        else{
+            if(ttt.playerTurn == 1){
+                ttt.verifyMove(clickedBox);
+                ttt.setBox(clickedBox,ttt.player1.piece);
+                ttt.changeTurnDisplay(2);
+                return ttt.playerTurn = 2;
+            }
+            if(ttt.playerTurn == 2){
+                ttt.verifyMove(clickedBox);
+                ttt.setBox(clickedBox,ttt.player2.piece);
+                ttt.changeTurnDisplay(1);
+                return ttt.playerTurn = 1;
+            }
         }
     });
-
+    
+    
+    
 }(jQuery));
 
 function TicTacToe() {
@@ -56,6 +68,14 @@ function TicTacToe() {
     }
     this.changeTurnDisplay = function(turn){
         this.displayTurn.html(turn);
+    }
+
+    //Methods
+    this.verifyMove = function (boxClicked) {
+        return true;
+    }
+    this.setBox = function (boxClicked,playerPiece) {
+        boxClicked.css('background-image',playerPiece);
     }
 }
 

@@ -16,6 +16,15 @@ body{
     background: no-repeat;
     background-size: contain;
 }
+.error{
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+
+
 /*------- Styles for each box --------*/
 /*Top Boxes & Mid Boxes*/
 /*.table>tbody>tr>.topLeft,.midLeft,*/
