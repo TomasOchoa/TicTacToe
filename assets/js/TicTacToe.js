@@ -103,7 +103,9 @@ function TicTacToe() {
     }
     this.showWinner = function () {
         //Change message in jumbotron
-        // console.log('Player',this.playerTurn,'wins!');
+        // this.changeMessageDisplay('Player '+this.playerTurn+' wins!');
+
+        //Highlight winning elements
         for(var id of this.winningCombo){
             //Highlight winning row
             var searchID = '#'+id;
