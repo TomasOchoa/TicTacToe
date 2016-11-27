@@ -15,16 +15,24 @@ body{
     background: no-repeat;
     background-size: contain;
 }
+/*Styles for the Message Display*/
 .error{
     color: red;
     font-weight: bold;
     text-decoration: underline;
 }
-/* 'X' */
+.win{
+    color: green;
+    font-weight: bold;
+}
+.tie{
+    color: rgb(181, 167, 65);
+    font-weight: bold;
+}
+/*Styles for 'X' and 'O'*/
 .cross{
     background-image: url("../images/cross.png");
 }
-/* 'O' */
 .circle{
     background-image: url("../images/circle.png");
 }

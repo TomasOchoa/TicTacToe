@@ -103,7 +103,9 @@ function TicTacToe() {
     }
     this.showWinner = function () {
         //Change message in jumbotron
-        // this.changeMessageDisplay('Player '+this.playerTurn+' wins!');
+        this.displayMessage.addClass('win');
+        this.changeMessageDisplay('Player '+this.playerTurn+' wins!');
+        $('div.turn').hide();
 
         //Highlight winning elements
         for(var id of this.winningCombo){
@@ -120,6 +122,12 @@ function TicTacToe() {
         }
     }
     this.showTie = function () {
+        //Change message in jumbotron
+        this.displayMessage.addClass('tie');
+        this.changeMessageDisplay('Tie Game!');
+        $('div.turn').hide();
+    }
+    this.reset = function () {
 
     }
 }
