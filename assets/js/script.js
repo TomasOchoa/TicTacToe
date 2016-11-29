@@ -4,7 +4,7 @@ $(function () {
     $(document).ready(function () {
         //Initialization
         var allButtons  = $('button');                              //Selector for all buttons
-        // var tableBoxes  = $('td');                                  //Selector for all table
+        var tableBoxes  = $('td');                                  //Selector for all table
         var ttt = new TicTacToe();                                  //Instantiate TicTacToe Object
 
         ttt.changeMessageDisplay('Pick your piece!');               //Prompt for p1 piece
@@ -26,7 +26,7 @@ $(function () {
         });
 
         //Box Listener
-        $('td').on('click',function () {
+        tableBoxes.click(function () {
             var clickedBox = $(this);
             //Variable that holds the box clicked
             if(clickedBox.hasClass('clicked') || clickedBox.hasClass('locked')){
