@@ -23,6 +23,9 @@ function TicTacToe() {
     this.changeTurnDisplay = function(turn){
         this.displayTurn.html(turn);
     }
+    this.doReset = function (currGame) {
+        console.log('do reset');
+    }
     this.verifyMove = function (clickedBox) {
         return !(clickedBox.hasClass('clicked') && this.turnsPlayed <= 9);
     }
@@ -142,7 +145,7 @@ function TicTacToe() {
         this.changeMessageDisplay('Tie Game!');
         $('div.turn').hide();
     }
-    this.reset = function () {
+    this.reset = function (currGame) {
         //Selector Variables
         var jumbotron = $('#jumbotron');                            //Selector for the jumbotron
         var resetBtn  = $('<button id="reset">Reset</button>');     //Variable that holds html to be added
@@ -150,20 +153,56 @@ function TicTacToe() {
         resetBtn.show();
 
         //Reset Listener
-        $('#reset').click(function (currentGame) {
+        $('#reset').click(function () {
             // console.log('Reset clicked!');
-            // console.log(currentGame);
-            //
-            // //Refresh the page
-            // // location.reload();
-            // console.log(location);
-            // console.log(this.turnsPlayed);
-            // console.log(this.winningCombo);
-            // console.log(this.player1);
-            // console.log(this.player2);
-            // console.log();
-            // console.log();
-        });
+            //Refresh the page (Lazy Way)
+            // location.reload();
 
+            //Remove reset button
+            resetBtn.remove();
+            console.log(jumbotron.children());
+
+            //Reset the gameboard
+            var allBoxes = $('td');
+            for(let each of allBoxes){
+                var boxID = '#'+each.id;
+                if($(boxID).hasClass('clicked'))
+                    $(boxID).removeClass('clicked');
+                if($(boxID).hasClass('locked'))
+                    $(boxID).removeClass('locked');
+                if($(boxID).hasClass('cross'))
+                    $(boxID).removeClass('cross');
+                if($(boxID).hasClass('circle'))
+                    $(boxID).removeClass('circle');
+                if($(boxID).hasClass('crossWin'))
+                    $(boxID).removeClass('crossWin');
+                if($(boxID).hasClass('circleWin'))
+                    $(boxID).removeClass('circleWin');
+            }
+
+            //Reset all the properties
+            currGame.turnsPlayed = 0;
+            currGame.winningCombo = [];
+            currGame.player1 = new Player();
+            currGame.player2 = new Player();
+
+            //Remove previous display classes
+            if(currGame.displayMessage.hasClass('win')){
+                currGame.displayMessage.removeClass('win');
+            }
+            if(currGame.displayMessage.hasClass('tie')){
+                currGame.displayMessage.removeClass('tie');
+            }
+            if(currGame.displayMessage.hasClass('error')){
+                currGame.displayMessage.removeClass('error');
+            }
+            //Reset display
+            currGame.changeMessageDisplay('Start New Game! Choose your piece.');
+            currGame.changeTurnDisplay(currGame.playerTurn);
+
+            //Show the hidden display elements
+            $('div.turn').show();
+            $('button').show();
+        });
     }
 }
