@@ -24,7 +24,7 @@ function TicTacToe() {
         this.displayTurn.html(turn);
     }
     this.verifyMove = function (clickedBox) {
-        return !((clickedBox.hasClass('cross') || clickedBox.hasClass('circle')) && this.turnsPlayed <= 9);
+        return !(clickedBox.hasClass('clicked') && this.turnsPlayed <= 9);
     }
     this.setBox = function (boxClicked) {
         var location = boxClicked.attr('id');
@@ -41,8 +41,8 @@ function TicTacToe() {
             this.player2.playerMoves.push(location);
             this.changeTurnDisplay(1);
         }
-        this.turnsPlayed++;
-        // console.log(this.turnsPlayed);
+        boxClicked.addClass('clicked');         //Mark box as 'clicked'
+        this.turnsPlayed++;                     //Increment turnsPlayed
         return;
     }
     this.checkWinner = function () {
@@ -104,10 +104,10 @@ function TicTacToe() {
         this.playerTurn = (this.playerTurn === 1 ? 2 : 1);
     }
     this.showWinner = function () {
-        //Change message in jumbotron
+        //Hide the turn and change message in jumbotron
+        $('div.turn').hide();
         this.displayMessage.addClass('win');
         this.changeMessageDisplay('Player '+this.playerTurn+' wins!');
-        $('div.turn').hide();
 
         //Highlight winning elements
         for(var id of this.winningCombo){
@@ -122,6 +122,19 @@ function TicTacToe() {
                 $(searchID).addClass('circleWin');
             }
         }
+
+        //Lock remaining elements with class 'locked'
+        var gameBoxes = $('td');
+        for(let each of gameBoxes){
+            //Setup the id to search
+            var searchBox = '#'+each.id;
+
+            //If not marked clicked, mark as locked to prevent further click events
+            if(!each.className.includes('clicked'))
+                $(searchBox).addClass('locked');
+
+        }
+        // return this.winningCombo.length === 3;
     }
     this.showTie = function () {
         //Change message in jumbotron
@@ -130,6 +143,27 @@ function TicTacToe() {
         $('div.turn').hide();
     }
     this.reset = function () {
-        console.log('Wats good irene!');
+        //Selector Variables
+        var jumbotron = $('#jumbotron');                            //Selector for the jumbotron
+        var resetBtn  = $('<button id="reset">Reset</button>');     //Variable that holds html to be added
+        jumbotron.append(resetBtn);                                 //Add the button to the jumbotron
+        resetBtn.show();
+
+        //Reset Listener
+        $('#reset').click(function (currentGame) {
+            // console.log('Reset clicked!');
+            // console.log(currentGame);
+            //
+            // //Refresh the page
+            // // location.reload();
+            // console.log(location);
+            // console.log(this.turnsPlayed);
+            // console.log(this.winningCombo);
+            // console.log(this.player1);
+            // console.log(this.player2);
+            // console.log();
+            // console.log();
+        });
+
     }
 }

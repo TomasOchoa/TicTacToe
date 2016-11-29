@@ -1,60 +1,71 @@
 "use strict";
 
 $(function () {
-    var ttt = new TicTacToe();
-    ttt.changeMessageDisplay('Pick your piece!');      //Prompt for p1 piece
+    $(document).ready(function () {
+        //Initialization
+        var allButtons  = $('button');                              //Selector for all buttons
+        // var tableBoxes  = $('td');                                  //Selector for all table
+        var ttt = new TicTacToe();                                  //Instantiate TicTacToe Object
 
-    //---------- Click Listeners ----------
-    //Reset Listener
-    $('#reset').click(function () {
-        ttt.reset();
-    });
+        ttt.changeMessageDisplay('Pick your piece!');               //Prompt for p1 piece
 
-
-    //Button Listener
-    $('button').click(function () {
-        if($(this).html() == 'X'){
-            ttt.player1.piece = 'x';
-            ttt.player2.piece = 'o';
-        }
-        else if($(this).html() == 'O'){
-            ttt.player1.piece = 'o';
-            ttt.player2.piece = 'x';
-        }
-        ttt.displayMessage.removeClass('error');
-        ttt.changeMessageDisplay('Make your move!')
-        $('button').hide();
-    });
-
-    //Box Listener
-    $('td').click(function () {
-        var clickedBox = $(this);
-        //If pieces !set yet, show error
-        if(ttt.player1.piece === ''){
-            ttt.displayMessage.addClass('error');
-        }
-        else if(!ttt.verifyMove(clickedBox)){
-            //Display error message
-            ttt.changeMessageDisplay('Pick a different box!');
-            ttt.displayMessage.addClass('error');
-            //Highlight all available moves
-            /* border: red solid; */
-            // border: solid red 5px;
-            // height: 100%;
-            // width: 100%;
-            // padding: initial;
-            // margin: inherit;
-        }
-        else{
-            ttt.changeMessageDisplay('Make your move!')
+        //---------- Click Listeners ----------
+        //Button Listener
+        allButtons.click(function () {
+            if($(this).html() == 'X'){
+                ttt.player1.piece = 'x';
+                ttt.player2.piece = 'o';
+            }
+            else if($(this).html() == 'O'){
+                ttt.player1.piece = 'o';
+                ttt.player2.piece = 'x';
+            }
             ttt.displayMessage.removeClass('error');
-            ttt.setBox(clickedBox);
-            if(ttt.checkWinner()){
-                ttt.showWinner();
+            ttt.changeMessageDisplay('Make your move!')
+            allButtons.hide();
+        });
+
+        //Box Listener
+        $('td').on('click',function () {
+            var clickedBox = $(this);
+            //Variable that holds the box clicked
+            if(clickedBox.hasClass('clicked') || clickedBox.hasClass('locked')){
+                return;
             }
-            else{
-                ttt.setNextTurn();
+            else {
+                //If pieces !set yet, show error
+                if(ttt.player1.piece === ''){
+                    ttt.displayMessage.addClass('error');
+                }
+                //If not valid move and there are less than 9 turns played
+                else if((!ttt.verifyMove(clickedBox)) && (ttt.turnsPlayed <= 9)){
+                    //Display error message
+                    ttt.changeMessageDisplay('Pick a different box!');
+                    ttt.displayMessage.addClass('error');
+                    /*
+                     Highlight all available moves
+                     border: red solid;
+                     border: solid red 5px;
+                     height: 100%;
+                     width: 100%;
+                     padding: initial;
+                     margin: inherit;
+                     */
+                }
+                //If valid move and still valid turn
+                else if(ttt.verifyMove(clickedBox) && ttt.turnsPlayed <= 9){
+                    ttt.displayMessage.removeClass('error');
+                    ttt.changeMessageDisplay('Make your move!')
+                    ttt.setBox(clickedBox);
+                    if(ttt.checkWinner()){
+                        ttt.showWinner();
+                        ttt.reset(ttt);
+                    }
+                    else{
+                        ttt.setNextTurn();
+                    }
+                }
             }
-        }
-    });
+        });
+    })
 }(jQuery));
