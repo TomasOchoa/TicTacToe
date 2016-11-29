@@ -29,6 +29,11 @@ body{
     color: rgb(181, 167, 65);
     font-weight: bold;
 }
+.init{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
 /*Styles for 'X' and 'O'*/
 .cross{
     background-image: url("../images/cross.png");
