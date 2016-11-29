@@ -9,7 +9,7 @@ My implementation of a Tic-Tac-Toe game using jQuery and JavaScript.
     - [ ] Implement turn counter
     - [ ] Show tie if checkWinner() returns false && amount of turns player == 9
 - [ ] Style Jumbotron
-- [ ] Implement reset
+- [x] Implement reset
     - [x] Include reset event listener for button
-    - [ ] Create reset logic on event fired
+    - [x] Create reset logic on event fired
 - [ ] Maybe make some animations for win/tie/displays?
