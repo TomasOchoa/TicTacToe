@@ -5,6 +5,12 @@ $(function () {
     ttt.changeMessageDisplay('Pick your piece!');      //Prompt for p1 piece
 
     //---------- Click Listeners ----------
+    //Reset Listener
+    $('#reset').click(function () {
+        ttt.reset();
+    });
+
+
     //Button Listener
     $('button').click(function () {
         if($(this).html() == 'X'){

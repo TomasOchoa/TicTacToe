@@ -24,7 +24,7 @@ function TicTacToe() {
         this.displayTurn.html(turn);
     }
     this.verifyMove = function (clickedBox) {
-        return !(clickedBox.hasClass('cross') || clickedBox.hasClass('circle'));
+        return !((clickedBox.hasClass('cross') || clickedBox.hasClass('circle')) && this.turnsPlayed <= 9);
     }
     this.setBox = function (boxClicked) {
         var location = boxClicked.attr('id');
@@ -41,6 +41,8 @@ function TicTacToe() {
             this.player2.playerMoves.push(location);
             this.changeTurnDisplay(1);
         }
+        this.turnsPlayed++;
+        // console.log(this.turnsPlayed);
         return;
     }
     this.checkWinner = function () {
@@ -128,6 +130,6 @@ function TicTacToe() {
         $('div.turn').hide();
     }
     this.reset = function () {
-
+        console.log('Wats good irene!');
     }
 }
