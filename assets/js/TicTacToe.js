@@ -160,7 +160,6 @@ function TicTacToe() {
 
             //Remove reset button
             resetBtn.remove();
-            console.log(jumbotron.children());
 
             //Reset the gameboard
             var allBoxes = $('td');
