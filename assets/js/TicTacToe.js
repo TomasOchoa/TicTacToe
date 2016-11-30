@@ -6,13 +6,13 @@ function TicTacToe() {
     //----------------------------------------
     //               Properties
     //----------------------------------------
+    this.displayMessage = $('#message');    //Message div
+    this.displayTurn = $('#turn');          //Turn div
+    this.player1 = new Player();            //Player1
+    this.player2 = new Player();            //Player2
     this.playerTurn = 1;                    //Default is first player
     this.turnsPlayed = 0;                   //Number of turns played
     this.winningCombo = [];                 //Holds winning elements to highlight later
-    this.player1 = new Player();            //Player1
-    this.player2 = new Player();            //Player2
-    this.displayMessage = $('#message');    //Message div
-    this.displayTurn = $('#turn');          //Turn div
     //----------------------------------------
     //               Methods
     //----------------------------------------
@@ -22,31 +22,6 @@ function TicTacToe() {
     }
     this.changeTurnDisplay = function(turn){
         this.displayTurn.html(turn);
-    }
-    this.doReset = function (currGame) {
-        console.log('do reset');
-    }
-    this.verifyMove = function (clickedBox) {
-        return !(clickedBox.hasClass('clicked') && this.turnsPlayed <= 9);
-    }
-    this.setBox = function (boxClicked) {
-        var location = boxClicked.attr('id');
-
-        //If player 1
-        if(this.playerTurn === 1){
-            this.player1.piece === 'x' ? boxClicked.addClass('cross') : boxClicked.addClass('circle');
-            this.player1.playerMoves.push(location);
-            this.changeTurnDisplay(2);
-        }
-        //If player 2
-        if(this.playerTurn === 2){
-            this.player2.piece === 'x' ? boxClicked.addClass('cross') : boxClicked.addClass('circle');
-            this.player2.playerMoves.push(location);
-            this.changeTurnDisplay(1);
-        }
-        boxClicked.addClass('clicked');         //Mark box as 'clicked'
-        this.turnsPlayed++;                     //Increment turnsPlayed
-        return;
     }
     this.checkWinner = function () {
         //Array of moves made from the current player
@@ -103,47 +78,8 @@ function TicTacToe() {
         }
         return false;
     };
-    this.setNextTurn = function () {
-        this.playerTurn = (this.playerTurn === 1 ? 2 : 1);
-    }
-    this.showWinner = function () {
-        //Hide the turn and change message in jumbotron
-        $('div.turn').hide();
-        this.displayMessage.addClass('win');
-        this.changeMessageDisplay('Player '+this.playerTurn+' wins!');
-
-        //Highlight winning elements
-        for(var id of this.winningCombo){
-            //Highlight winning row
-            var searchID = '#'+id;
-            if($(searchID).hasClass('cross')){
-                $(searchID).removeClass('cross');
-                $(searchID).addClass('crossWin');
-            }
-            else if($(searchID).hasClass('circle')){
-                $(searchID).removeClass('circle');
-                $(searchID).addClass('circleWin');
-            }
-        }
-
-        //Lock remaining elements with class 'locked'
-        var gameBoxes = $('td');
-        for(let each of gameBoxes){
-            //Setup the id to search
-            var searchBox = '#'+each.id;
-
-            //If not marked clicked, mark as locked to prevent further click events
-            if(!each.className.includes('clicked'))
-                $(searchBox).addClass('locked');
-
-        }
-        // return this.winningCombo.length === 3;
-    }
-    this.showTie = function () {
-        //Change message in jumbotron
-        this.displayMessage.addClass('tie');
-        this.changeMessageDisplay('Tie Game!');
-        $('div.turn').hide();
+    this.doReset = function (currGame) {
+        console.log('do reset');
     }
     this.reset = function (currGame) {
         //Selector Variables
@@ -203,5 +139,74 @@ function TicTacToe() {
             $('div.turn').show();
             $('button').show();
         });
+    }
+    this.setBox = function (boxClicked) {
+        var location = boxClicked.attr('id');
+
+        //If player 1
+        if(this.playerTurn === 1){
+            this.player1.piece === 'x' ? boxClicked.addClass('cross') : boxClicked.addClass('circle');
+            this.player1.playerMoves.push(location);
+            this.changeTurnDisplay(2);
+        }
+        //If player 2
+        if(this.playerTurn === 2){
+            this.player2.piece === 'x' ? boxClicked.addClass('cross') : boxClicked.addClass('circle');
+            this.player2.playerMoves.push(location);
+            this.changeTurnDisplay(1);
+        }
+        boxClicked.toggleClass('available');
+        boxClicked.addClass('clicked');         //Mark box as 'clicked'
+        this.turnsPlayed++;                     //Increment turnsPlayed
+        return;
+    }
+    this.setNextTurn = function () {
+        this.playerTurn = (this.playerTurn === 1 ? 2 : 1);
+    }
+    this.showAvailableMoves = function (gameBoxes) {
+        //Get all available boxes
+        var availableMoves = $('td.available');
+        var highlightColor = 'rgba(239, 232, 0, 0.5)';
+        availableMoves.css('background-color',highlightColor);
+    }
+    this.showTie = function () {
+        //Change message in jumbotron
+        this.displayMessage.addClass('tie');
+        this.changeMessageDisplay('Tie Game!');
+        $('div.turn').hide();
+    }
+    this.showWinner = function () {
+        //Hide the turn and change message in jumbotron
+        $('div.turn').hide();
+        this.displayMessage.addClass('win');
+        this.changeMessageDisplay('Player '+this.playerTurn+' wins!');
+
+        //Highlight winning elements
+        for(var id of this.winningCombo){
+            //Highlight winning row
+            var searchID = '#'+id;
+            if($(searchID).hasClass('cross')){
+                $(searchID).removeClass('cross');
+                $(searchID).addClass('crossWin');
+            }
+            else if($(searchID).hasClass('circle')){
+                $(searchID).removeClass('circle');
+                $(searchID).addClass('circleWin');
+            }
+        }
+
+        //Lock remaining elements with class 'locked'
+        var gameBoxes = $('td');
+        for(let each of gameBoxes){
+            //Setup the id to search
+            var searchBox = '#'+each.id;
+
+            //If not marked clicked, mark as locked to prevent further click events
+            if(!each.className.includes('clicked'))
+                $(searchBox).addClass('locked');
+        }
+    }
+    this.verifyMove = function (clickedBox) {
+        return !(clickedBox.hasClass('clicked') && this.turnsPlayed <= 9);
     }
 }
