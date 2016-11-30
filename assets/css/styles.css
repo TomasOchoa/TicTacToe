@@ -3,6 +3,7 @@ html{
 }
 body{
     height: 100%;
+    font-family: 'Bungee', cursive;
 }
 .table>tbody>tr>td{
     border: solid rgb(50,50,50) 20px;
@@ -16,6 +17,31 @@ body{
     background-size: contain;
 }
 /*Styles for the Message Display*/
+.display{
+    text-align: center;
+}
+#jumbotron{
+    margin-top: 30px;
+    border-radius: 0;
+}
+.btn {
+    padding: 6px 24px;
+    font-size: 28px;
+}
+#x:hover {
+    background-color: rgb(255, 77, 77);
+    border-color: darkred;
+}
+#o:hover {
+    background-color: rgb(0, 204, 255);
+    border-color: darkblue;
+}
+.playerX{
+    color: rgb(255, 77, 77);
+}
+.playerO{
+    color: rgb(0, 204, 255);
+}
 .error{
     color: red;
     font-weight: bold;
@@ -47,39 +73,3 @@ body{
 .circleWin{
     background-image: url("../images/circle-win.png");
 }
-
-
-
-
-/*------- Styles for each box --------*/
-/*Top Boxes & Mid Boxes*/
-/*.table>tbody>tr>.topLeft,.midLeft,*/
-/*.table>tbody>tr>.midLeft{*/
-    /*border-bottom: solid black 30px;*/
-    /*border-right: solid black 30px;*/
-    /*border-radius: 30px;*/
-/*}*/
-/*.table>tbody>tr>.topCenter,.bottomCenter,*/
-/*.table>tbody>tr>.midCenter{*/
-    /*border-bottom: solid black 30px;*/
-    /*border-radius: 30px;*/
-/*}*/
-/*.table>tbody>tr>.topRight,.bottomRight,*/
-/*.table>tbody>tr>.midRight{*/
-    /*border-bottom: solid black 30px;*/
-    /*border-left: solid black 30px;*/
-    /*border-radius: 30px;*/
-/*}*/
-/*!*Bottom Boxes*!*/
-/*.table>tbody>tr>.bottomLeft{*/
-    /*border-right: solid black 30px;*/
-    /*border-radius: 30px;*/
-/*}*/
-/*.table>tbody>tr>.bottomCenter{*/
-/*}*/
-/*.table>tbody>tr>.bottomRight{*/
-    /*border-left: solid black 30px;*/
-    /*border-radius: 30px;*/
-/*}*/
-/*--------------------------*/
-
