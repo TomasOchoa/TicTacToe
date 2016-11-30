@@ -38,6 +38,8 @@ $(function () {
             else if(clickedBox.hasClass('clicked') && ttt.turnsPlayed < 9){
                 ttt.changeMessageDisplay('Pick a different box!');
                 ttt.displayMessage.addClass('error');
+                ttt.showAvailableMoves(tableBoxes);
+
                 /*
                  Highlight all available moves
                  border: red solid;
