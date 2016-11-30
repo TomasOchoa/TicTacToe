@@ -6,22 +6,55 @@ function TicTacToe() {
     //----------------------------------------
     //               Properties
     //----------------------------------------
-    this.displayMessage = $('#message');    //Message div
-    this.displayTurn = $('#turn');          //Turn div
+    //Selector Properties
+    this.displayMessage = $('#message');    //Selector for message div
+    this.displayTurn = $('#turn');          //Selector for display turn span
+    this.playerDisplay = $('h4');           //Selector for h4 element
+    this.choiceX  = $('button#x');          //Selector for 'x' choice
+    this.choiceO  = $('button#o');          //Selector for 'o' choice
+    this.tableBoxes  = $('td');             //Selector for all table
+    //Object Properties
     this.player1 = new Player();            //Player1
     this.player2 = new Player();            //Player2
+    //Variable properties
     this.playerTurn = 1;                    //Default is first player
     this.turnsPlayed = 0;                   //Number of turns played
     this.winningCombo = [];                 //Holds winning elements to highlight later
+
     //----------------------------------------
     //               Methods
     //----------------------------------------
     this.changeMessageDisplay = function (newHtml) {
-        var msgHtml = '<h4>'+newHtml+'</h4>';
+        var msgHtml = '<h2>'+newHtml+'</h2>';
         this.displayMessage.html(msgHtml);
     }
     this.changeTurnDisplay = function(turn){
-        this.displayTurn.html(turn);
+        this.displayTurn.html(turn);        //Update turn
+    }
+    this.changeTurnDisplayColor = function(){
+        var playerDisplay = $('h4');            //Selector for h4 element
+        var xJumbotronColor = 'rgba(239, 218, 218, 1)';
+        var oJumbotronColor = 'rgba(46, 160, 191, 0.3)';
+
+        //Remove any previous player color display class
+        if(playerDisplay.hasClass('playerX'))
+            playerDisplay.removeClass('playerX');
+
+        else if(playerDisplay.hasClass('playerO')) {
+            playerDisplay.removeClass('playerO');
+        }
+
+        //Decide what color
+        if(this.playerTurn === 1 ){
+            this.player1.piece === 'x' ? playerDisplay.addClass('playerX') : playerDisplay.addClass('playerO');
+            this.player1.piece === 'x' ? $('div#jumbotron').css('background-color',xJumbotronColor) : $('div#jumbotron').css('background-color',oJumbotronColor);
+        }
+
+        if(this.playerTurn === 2 ){
+            this.player2.piece === 'x' ? playerDisplay.addClass('playerX') : playerDisplay.addClass('playerO');
+            this.player2.piece === 'x' ? $('div#jumbotron').css('background-color',xJumbotronColor) : $('div#jumbotron').css('background-color',oJumbotronColor);
+        }
+
     }
     this.checkWinner = function () {
         //Array of moves made from the current player
@@ -78,9 +111,6 @@ function TicTacToe() {
         }
         return false;
     };
-    this.doReset = function (currGame) {
-        console.log('do reset');
-    }
     this.hideAvailableMoves = function () {
         var availableMoves = $('td.available');
         availableMoves.css('background-color','rgba(0,0,0,0)');
@@ -89,22 +119,34 @@ function TicTacToe() {
         //Selector Variables
         var jumbotron = $('#jumbotron');                            //Selector for the jumbotron
         var resetBtn  = $('<button id="reset">Reset</button>');     //Variable that holds html to be added
+
         jumbotron.append(resetBtn);                                 //Add the button to the jumbotron
         resetBtn.show();
+        this.hideAvailableMoves();
 
         //Reset Listener
         $('#reset').click(function () {
-            // console.log('Reset clicked!');
             //Refresh the page (Lazy Way)
             // location.reload();
 
             //Remove reset button
             resetBtn.remove();
 
+            //Remove prior display player color classes
+            if($('div.turn').hasClass('playerX'))
+                $('div.turn').removeClass('playerX');
+            else if($('div.turn').hasClass('playerO'))
+                $('div.turn').removeClass('playerO');
+
+            //SHow hidden display elements
+            $('button').show();
+
             //Reset the gameboard
             var allBoxes = $('td');
             for(let each of allBoxes){
                 var boxID = '#'+each.id;
+                if(!$(boxID).hasClass('available'))
+                    $(boxID).addClass('available');
                 if($(boxID).hasClass('clicked'))
                     $(boxID).removeClass('clicked');
                 if($(boxID).hasClass('locked'))
@@ -124,24 +166,18 @@ function TicTacToe() {
             currGame.winningCombo = [];
             currGame.player1 = new Player();
             currGame.player2 = new Player();
-
             //Remove previous display classes
-            if(currGame.displayMessage.hasClass('win')){
+            if(currGame.displayMessage.hasClass('win'))
                 currGame.displayMessage.removeClass('win');
-            }
-            if(currGame.displayMessage.hasClass('tie')){
+            if(currGame.displayMessage.hasClass('tie'))
                 currGame.displayMessage.removeClass('tie');
-            }
-            if(currGame.displayMessage.hasClass('error')){
+            if(currGame.displayMessage.hasClass('error'))
                 currGame.displayMessage.removeClass('error');
-            }
             //Reset display
             currGame.changeMessageDisplay('Start New Game! Choose your piece.');
             currGame.changeTurnDisplay(currGame.playerTurn);
+            jumbotron.css('background-color','#eee');
 
-            //Show the hidden display elements
-            $('div.turn').show();
-            $('button').show();
         });
     }
     this.setBox = function (boxClicked) {
