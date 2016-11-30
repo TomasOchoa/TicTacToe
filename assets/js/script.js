@@ -3,30 +3,49 @@
 $(function () {
     $(document).ready(function () {
         //Initialization
-        var allButtons  = $('button');                              //Selector for all buttons
-        var tableBoxes  = $('td');                                  //Selector for all table
         var ttt = new TicTacToe();                                  //Instantiate TicTacToe Object
-
         ttt.changeMessageDisplay('Pick your piece!');               //Prompt for p1 piece
+        $('div.turn').hide();
 
         //---------- Click Listeners ----------
-        //Button Listener
-        allButtons.click(function () {
-            if($(this).html() == 'X'){
+        //Button Listeners
+        ttt.choiceX.click(function () {
+            // console.log(this);
+            $('div.turn').show();
+            if(ttt.playerTurn === 1){
                 ttt.player1.piece = 'x';
                 ttt.player2.piece = 'o';
             }
-            else if($(this).html() == 'O'){
-                ttt.player1.piece = 'o';
+            else if(ttt.playerTurn === 2){
                 ttt.player2.piece = 'x';
+                ttt.player1.piece = 'o';
             }
             ttt.displayMessage.removeClass('error');
             ttt.changeMessageDisplay('Make your move!')
-            allButtons.hide();
+            ttt.changeTurnDisplayColor();
+            ttt.choiceX.hide();
+            ttt.choiceO.hide();
+        });
+        ttt.choiceO.click(function () {
+            // console.log(this);
+            $('div.turn').show();
+            if(ttt.playerTurn === 1){
+                ttt.player1.piece = 'o';
+                ttt.player2.piece = 'x';
+            }
+            else if(ttt.playerTurn === 2){
+                ttt.player2.piece = 'o';
+                ttt.player1.piece = 'x';
+            }
+            ttt.displayMessage.removeClass('error');
+            ttt.changeMessageDisplay('Make your move!')
+            ttt.changeTurnDisplayColor();
+            ttt.choiceX.hide();
+            ttt.choiceO.hide();
         });
 
         //Box Listener
-        tableBoxes.click(function () {
+        ttt.tableBoxes.click(function () {
             //Variable that holds the box clicked
             var clickedBox = $(this);
 
@@ -49,7 +68,7 @@ $(function () {
                 else if (ttt.verifyMove(clickedBox) && ttt.turnsPlayed <= 9){
                     ttt.hideAvailableMoves();
                     ttt.displayMessage.removeClass('error');
-                    ttt.changeMessageDisplay('Make your move!')
+                    ttt.changeMessageDisplay('Make your move!');
                     ttt.setBox(clickedBox);
 
                     //If tied
@@ -63,8 +82,11 @@ $(function () {
                         ttt.reset(ttt);
                     }
                     //Vaild move
-                    else
+                    else{
                         ttt.setNextTurn();
+                        ttt.changeTurnDisplayColor();
+                    }
+
                 }
             }
         });
