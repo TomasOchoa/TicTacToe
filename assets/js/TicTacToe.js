@@ -81,6 +81,10 @@ function TicTacToe() {
     this.doReset = function (currGame) {
         console.log('do reset');
     }
+    this.hideAvailableMoves = function () {
+        var availableMoves = $('td.available');
+        availableMoves.css('background-color','rgba(0,0,0,0)');
+    }
     this.reset = function (currGame) {
         //Selector Variables
         var jumbotron = $('#jumbotron');                            //Selector for the jumbotron
