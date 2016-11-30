@@ -38,17 +38,7 @@ $(function () {
             else if(clickedBox.hasClass('clicked') && ttt.turnsPlayed < 9){
                 ttt.changeMessageDisplay('Pick a different box!');
                 ttt.displayMessage.addClass('error');
-                ttt.showAvailableMoves(tableBoxes);
-
-                /*
-                 Highlight all available moves
-                 border: red solid;
-                 border: solid red 5px;
-                 height: 100%;
-                 width: 100%;
-                 padding: initial;
-                 margin: inherit;
-                 */
+                ttt.showAvailableMoves();
             }
             else {
                 //If pieces !set yet, show error
@@ -57,6 +47,7 @@ $(function () {
                 }
                 //If valid move and still valid turn
                 else if (ttt.verifyMove(clickedBox) && ttt.turnsPlayed <= 9){
+                    ttt.hideAvailableMoves();
                     ttt.displayMessage.removeClass('error');
                     ttt.changeMessageDisplay('Make your move!')
                     ttt.setBox(clickedBox);
