@@ -13,4 +13,9 @@ My implementation of a Tic-Tac-Toe game using jQuery and JavaScript.
     - [x] Create reset logic on event fired
 - [x] Highlight All available moves if a move is invalid
 - [x] Style Jumbotron
+    - [ ] Add jumbotron style for Tie
 - [ ] Maybe make some animations for win/tie/displays?
+- [ ] Create a scoreboard
+    - [ ] Score for player 1 & player 2
+    - [ ] Display number of turns played
+    - [ ] Make it like an electric scoreboard
