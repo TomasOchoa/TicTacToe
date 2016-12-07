@@ -213,6 +213,7 @@ function TicTacToe() {
         //Change message in jumbotron
         this.displayMessage.addClass('tie');
         this.changeMessageDisplay('Tie Game!');
+        $('div#jumbotron').css('background-color','rgba(181, 167, 65, 0.3)');
         $('div.turn').hide();
     }
     this.showWinner = function () {
